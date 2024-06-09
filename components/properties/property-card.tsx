@@ -12,6 +12,7 @@ export const PropertyCard = ({ className }: { className?: string }) => {
             fill
             src="/house.jpg"
             className="object-cover"
+            quality={80}
           />
         </div>
         <div className="px-4 py-2">
