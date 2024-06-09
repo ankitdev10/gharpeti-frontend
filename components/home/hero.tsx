@@ -1,0 +1,38 @@
+import { PropertyCard } from "../properties/property-card";
+
+export const Hero = () => {
+  return (
+    <div className="px-12 py-20 min-h-[calc(100vh-64.8px)] flex gap-16">
+      <div className="w-[600px] space-y-6">
+        <h1 className="text-6xl font-inter font-bold">
+          Rent or sell your <span className="text-primary">property.</span>
+        </h1>
+
+        <p className="">
+          Gharpeti is a platform that allows you to rent or sell your property
+          with ease. Whether you&apos;re a homeowner or a business owner,
+          Gharpeti has everything you need to make the most of your property.
+        </p>
+
+        <div className="flex items-center  border-l">
+          <div className="border-r px-8">
+            <h2 className="text-primary font-bold text-3xl">50k+</h2>
+            <h3 className="text-sm text-muted-foreground">renters</h3>
+          </div>
+          <div className="px-8">
+            <h2 className="text-primary font-bold text-3xl">20k+</h2>
+            <h3 className="text-sm text-muted-foreground">properties</h3>
+          </div>
+        </div>
+      </div>
+
+      <div className="relative flex-1">
+        <div className="absolute inset-0 before:content-[''] before:absolute before:inset-0 before:bg-[url('/hero-map.jpg')] before:bg-cover before:blur-[5px] before:-z-10"></div>
+        <div className="relative z-10 p-4  h-full">
+          <PropertyCard className="absolute -left-12" />
+          <PropertyCard className="absolute  -bottom-6 -right-6" />
+        </div>
+      </div>
+    </div>
+  );
+};
