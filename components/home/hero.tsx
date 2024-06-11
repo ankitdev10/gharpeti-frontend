@@ -6,8 +6,8 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "../ui/tabs";
 
 export const Hero = () => {
   return (
-    <div className="px-12 py-20 min-h-[calc(100vh-64.8px)] flex gap-16">
-      <div className="w-[600px] space-y-6">
+    <div className="px-12 py-20 min-h-[calc(100vh-64.8px)] grid grid-cols-[600px_1fr] items-center gap-16">
+      <div className="space-y-6">
         <h1 className="text-6xl font-inter font-bold">
           Rent or sell your <span className="text-primary">property.</span>
         </h1>
@@ -48,7 +48,7 @@ export const Hero = () => {
         </Tabs>
       </div>
 
-      <div className="relative flex-1 hidden md:block">
+      <div className="relative h-full hidden md:block">
         <div className="absolute inset-0 before:content-[''] before:absolute before:inset-0 before:bg-[url('/hero-map2.jpg')] before:bg-cover before:blur-[1px] before:-z-10"></div>
         <div className="relative z-10 p-4  h-full">
           <PropertyCard className="absolute -left-12" />
