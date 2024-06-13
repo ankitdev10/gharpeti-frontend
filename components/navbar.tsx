@@ -32,10 +32,15 @@ export const Navbar = () => {
         </ul>
 
         <div className="ml-auto flex space-x-6 items-center">
-          <Button size="sm" variant="outline">
-            Login
-          </Button>
-          <Button size="sm">Signup</Button>
+          <Link href="/login">
+            <Button size="sm" variant="outline">
+              Login
+            </Button>
+          </Link>
+
+          <Link href="/register">
+            <Button size="sm">Signup</Button>
+          </Link>
           <ModeToggle />
         </div>
       </nav>
