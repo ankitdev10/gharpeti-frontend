@@ -8,7 +8,7 @@ export default function SiteLayout({
   return (
     <>
       <Navbar />
-      <main className="max-w-[1440px] mx-auto">{children}</main>
+      <main className="">{children}</main>
     </>
   );
 }
