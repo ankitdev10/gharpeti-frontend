@@ -1,9 +1,7 @@
+import Providers from "@/components/providers";
 import type { Metadata } from "next";
 import { Inter, Poppins } from "next/font/google";
 import "./globals.css";
-import { ThemeProvider } from "next-themes";
-import Providers from "@/components/providers";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -29,17 +27,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.variable} ${poppins.variable} font-poppins`}>
-        <Providers>
-          <ReactQueryDevtools initialIsOpen={false} />
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="light"
-            enableSystem
-            disableTransitionOnChange
-          >
-            {children}
-          </ThemeProvider>
-        </Providers>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

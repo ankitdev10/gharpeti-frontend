@@ -1,8 +1,9 @@
+import api from "@/lib/api";
 import { PropertyCard } from "../properties/property-card";
 import { Button } from "../ui/button";
 import { Card, CardContent } from "../ui/card";
 import { Input } from "../ui/input";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "../ui/tabs";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
 
 export const Hero = () => {
   return (

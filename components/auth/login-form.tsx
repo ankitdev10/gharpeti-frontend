@@ -1,13 +1,15 @@
 "use client";
 
+import { login } from "@/lib/providers/auth";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useMutation } from "@tanstack/react-query";
+import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Form, FormControl, FormField, FormItem, FormLabel } from "../ui/form";
 import { Input } from "../ui/input";
 import { LoadingButton } from "../ui/loading-button";
-import Link from "next/link";
-import { useTransition } from "react";
+import { toast } from "sonner";
 const loginSchema = z.object({
   email: z.string().email().min(5).max(100),
   password: z.string().min(6).max(100),
@@ -16,7 +18,24 @@ const loginSchema = z.object({
 type LoginSchema = z.infer<typeof loginSchema>;
 
 export const LoginForm = () => {
-  const [isPending, startTransition] = useTransition();
+  const {
+    mutate: _login,
+    isPending,
+
+    data,
+  } = useMutation({
+    mutationFn: login,
+    onSuccess: (data) => {
+      console.log("from success", data);
+      toast.success("Login successfulll");
+    },
+    onError: (err) => {
+      console.log("err from query", err.message);
+      toast.error(err.message);
+      console.log("err from comp", err);
+    },
+  });
+
   const form = useForm<LoginSchema>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
@@ -24,8 +43,14 @@ export const LoginForm = () => {
       password: "",
     },
   });
-  const onSubmit = (values: LoginSchema) => {
-    console.log({ values });
+
+  const onSubmit = async (values: LoginSchema) => {
+    _login({
+      email: values.email,
+      password: values.password,
+    });
+
+    console.log({ data });
   };
 
   const rootError = form.formState.errors.root?.message;
@@ -91,7 +116,7 @@ export const LoginForm = () => {
             <p className="text-sm font-medium text-destructive">{rootError}</p>
           )}
           <LoadingButton
-            disabled={isPending || !form.formState.isValid}
+            disabled={isPending}
             type="submit"
             loading={isPending}
             defaultText="Login"
