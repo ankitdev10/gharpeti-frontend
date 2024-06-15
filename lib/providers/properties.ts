@@ -1,5 +1,3 @@
-"use server";
-
 import api from "../api";
 
 export const getProperties = async () => {

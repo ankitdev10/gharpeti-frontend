@@ -1,8 +1,6 @@
-"use server";
-
 import { AUTH_TOKEN_KEY } from "@/constants";
+import { isServer } from "@tanstack/react-query";
 import axios from "axios";
-import { cookies } from "next/headers";
 const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
 
 const api = axios.create({
@@ -10,8 +8,10 @@ const api = axios.create({
 });
 
 api.interceptors.request.use((config) => {
-  const cookieStore = cookies();
-  const token = cookieStore.get(AUTH_TOKEN_KEY)?.value ?? "";
+  if (isServer) {
+    return config;
+  }
+  const token = localStorage.getItem(AUTH_TOKEN_KEY) ?? undefined;
   config.headers.Authorization = `Bearer ${token}`;
   return config;
 });
