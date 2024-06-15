@@ -94,11 +94,8 @@ const RegisterForm = ({ type }: RegisterFormProps) => {
 
   const [isPending, startTransition] = useTransition();
 
-  const onSubmit = (values: RegisterSchema) => {
-    console.log({ values });
-  };
+  const onSubmit = (values: RegisterSchema) => {};
   const rootError = form.formState.errors.root?.message;
-  console.log(form.formState.errors);
   return (
     <Form {...form}>
       <form className="space-y-2" onSubmit={form.handleSubmit(onSubmit)}>

@@ -18,21 +18,13 @@ const loginSchema = z.object({
 type LoginSchema = z.infer<typeof loginSchema>;
 
 export const LoginForm = () => {
-  const {
-    mutate: _login,
-    isPending,
-
-    data,
-  } = useMutation({
+  const { mutate: _login, isPending } = useMutation({
     mutationFn: login,
-    onSuccess: (data) => {
-      console.log("from success", data);
+    onSuccess: () => {
       toast.success("Login successfulll");
     },
     onError: (err) => {
-      console.log("err from query", err.message);
       toast.error(err.message);
-      console.log("err from comp", err);
     },
   });
 
@@ -49,8 +41,6 @@ export const LoginForm = () => {
       email: values.email,
       password: values.password,
     });
-
-    console.log({ data });
   };
 
   const rootError = form.formState.errors.root?.message;
