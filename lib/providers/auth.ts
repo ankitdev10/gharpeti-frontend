@@ -1,8 +1,9 @@
 import { AUTH_TOKEN_KEY } from "@/constants";
-import axios from "axios";
+import api from "../api";
+import { ApiResponse } from "@/types";
 export const login = async ({ email, password }: LoginInput) => {
   try {
-    const res = await axios.post("http://localhost:4000/auth/login", {
+    const res = await api.post<ApiResponse<User>>("/auth/login", {
       email,
       password,
     });
@@ -19,3 +20,18 @@ type LoginInput = {
   email: string;
   password: string;
 };
+
+export interface User {
+  id: number;
+  fullName: string;
+  email: string;
+  password: string;
+  location: string;
+  phone: string;
+  type: string;
+  properties: any;
+  token: string;
+  createdAt: string;
+  updatedAt: string;
+  deletedAt: any;
+}

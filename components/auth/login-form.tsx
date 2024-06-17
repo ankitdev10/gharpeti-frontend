@@ -6,22 +6,38 @@ import { useMutation } from "@tanstack/react-query";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { Form, FormControl, FormField, FormItem, FormLabel } from "../ui/form";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "../ui/form";
 import { Input } from "../ui/input";
 import { LoadingButton } from "../ui/loading-button";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 const loginSchema = z.object({
-  email: z.string().email().min(5).max(100),
-  password: z.string().min(6).max(100),
+  email: z
+    .string()
+    .email()
+    .min(1, {
+      message: "Email is required",
+    })
+    .max(100),
+  password: z.string().min(6, { message: "Password is required" }).max(100),
 });
 
 type LoginSchema = z.infer<typeof loginSchema>;
 
 export const LoginForm = () => {
+  const router = useRouter();
   const { mutate: _login, isPending } = useMutation({
     mutationFn: login,
     onSuccess: () => {
       toast.success("Login successfulll");
+      router.push("/");
     },
     onError: (err) => {
       toast.error(err.message);
@@ -67,15 +83,7 @@ export const LoginForm = () => {
                     {...field}
                   />
                 </FormControl>
-
-                {form.formState.errors.email?.message && (
-                  <p className="text-sm font-medium text-destructive">
-                    {form.formState.errors.email?.message.replace(
-                      "String",
-                      "Email",
-                    )}
-                  </p>
-                )}
+                <FormMessage />
               </FormItem>
             )}
           />
@@ -90,14 +98,7 @@ export const LoginForm = () => {
                   <Input placeholder="********" type="password" {...field} />
                 </FormControl>
 
-                {form.formState.errors.password?.message && (
-                  <p className="text-sm font-medium text-destructive">
-                    {form.formState.errors.password?.message.replace(
-                      "String",
-                      "Password",
-                    )}
-                  </p>
-                )}
+                <FormMessage />
               </FormItem>
             )}
           />

@@ -7,7 +7,14 @@ import Link from "next/link";
 import { HTMLAttributes, useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
-import { Form, FormControl, FormField, FormItem, FormLabel } from "../ui/form";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "../ui/form";
 import { LoadingButton } from "../ui/loading-button";
 import { PasswordInput } from "../ui/password-input";
 
@@ -108,14 +115,7 @@ const RegisterForm = ({ type }: RegisterFormProps) => {
               <FormControl>
                 <Input {...field} type="text" placeholder="Ankit Poudel" />
               </FormControl>
-              {form.formState.errors.fullName?.message && (
-                <p className="text-sm font-medium text-destructive">
-                  {form.formState.errors.fullName?.message?.replace(
-                    "String",
-                    "Full Name",
-                  )}
-                </p>
-              )}
+              <FormMessage />
             </FormItem>
           )}
         />
@@ -133,14 +133,7 @@ const RegisterForm = ({ type }: RegisterFormProps) => {
                   placeholder="email@example.com"
                 />
               </FormControl>
-              {form.formState.errors.email?.message && (
-                <p className="text-sm font-medium text-destructive">
-                  {form.formState.errors.email?.message?.replace(
-                    "String",
-                    "Email",
-                  )}
-                </p>
-              )}
+              <FormMessage />
             </FormItem>
           )}
         />
@@ -158,14 +151,7 @@ const RegisterForm = ({ type }: RegisterFormProps) => {
                   placeholder="9840480328"
                 />
               </FormControl>
-              {form.formState.errors.phone?.message && (
-                <p className="text-sm font-medium text-destructive">
-                  {form.formState.errors.phone?.message?.replace(
-                    "String",
-                    "Phone",
-                  )}
-                </p>
-              )}
+              <FormMessage />
             </FormItem>
           )}
         />
@@ -182,14 +168,7 @@ const RegisterForm = ({ type }: RegisterFormProps) => {
                   placeholder="Kharibot, Kathmandu"
                 />
               </FormControl>
-              {form.formState.errors.location?.message && (
-                <p className="text-sm font-medium text-destructive">
-                  {form.formState.errors.location?.message?.replace(
-                    "String",
-                    "Location",
-                  )}
-                </p>
-              )}
+              <FormMessage />
             </FormItem>
           )}
         />
@@ -209,14 +188,7 @@ const RegisterForm = ({ type }: RegisterFormProps) => {
                   {...field}
                 />
               </FormControl>
-              {form.formState.errors.password?.message && (
-                <p className="text-sm font-medium text-destructive">
-                  {form.formState.errors.password?.message.replace(
-                    "String",
-                    "Password",
-                  )}
-                </p>
-              )}
+              <FormMessage />
             </FormItem>
           )}
         />
@@ -236,14 +208,8 @@ const RegisterForm = ({ type }: RegisterFormProps) => {
                   {...field}
                 />
               </FormControl>
-              {form.formState.errors.confirmPassword?.message && (
-                <p className="text-sm font-medium text-destructive">
-                  {form.formState.errors.confirmPassword?.message.replace(
-                    "String",
-                    "Confirm Password",
-                  )}
-                </p>
-              )}
+
+              <FormMessage />
             </FormItem>
           )}
         />
