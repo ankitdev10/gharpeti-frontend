@@ -1,6 +1,7 @@
 import { AUTH_TOKEN_KEY } from "@/constants";
 import api from "../api";
 import { ApiResponse } from "@/types";
+import { DeepPartial } from "react-hook-form";
 export const login = async ({ email, password }: LoginInput) => {
   try {
     const res = await api.post<ApiResponse<User>>("/auth/login", {
@@ -10,6 +11,16 @@ export const login = async ({ email, password }: LoginInput) => {
 
     const token = res.headers[AUTH_TOKEN_KEY];
     localStorage.setItem(AUTH_TOKEN_KEY, token);
+    return res.data;
+  } catch (err: any) {
+    throw new Error(err.response.data.message);
+  }
+};
+
+export const register = async (input: DeepPartial<User>) => {
+  try {
+    const res = await api.post<ApiResponse<User>>("/users/create", input);
+    console.log(res);
     return res.data;
   } catch (err: any) {
     throw new Error(err.response.data.message);

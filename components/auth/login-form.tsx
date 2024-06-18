@@ -18,6 +18,7 @@ import { Input } from "../ui/input";
 import { LoadingButton } from "../ui/loading-button";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import { PasswordInput } from "../ui/password-input";
 const loginSchema = z.object({
   email: z
     .string()
@@ -95,7 +96,14 @@ export const LoginForm = () => {
               <FormItem>
                 <FormLabel>Password</FormLabel>
                 <FormControl>
-                  <Input placeholder="********" type="password" {...field} />
+                  <PasswordInput
+                    placeholder="*******"
+                    autoCapitalize="none"
+                    autoCorrect="off"
+                    autoComplete="current-password"
+                    required
+                    {...field}
+                  />
                 </FormControl>
 
                 <FormMessage />
