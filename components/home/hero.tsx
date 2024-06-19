@@ -7,7 +7,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
 
 export const Hero = () => {
   return (
-    <div className="px-12 light:bg-gray-100 py-20 min-h-[calc(100vh-64.8px)] grid grid-cols-[600px_1fr] items-center gap-16">
+    <div className="px-12 light:bg-gray-100 py-20 min-h-[calc(100vh-65px)] grid grid-cols-[600px_1fr] items-center gap-16">
       <div className="space-y-6">
         <h1 className="text-6xl font-inter font-bold">
           Rent or sell your <span className="text-primary">property.</span>

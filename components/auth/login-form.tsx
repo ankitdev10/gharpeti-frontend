@@ -2,9 +2,11 @@
 
 import { login } from "@/lib/providers/auth";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import { z } from "zod";
 import {
   Form,
@@ -16,8 +18,6 @@ import {
 } from "../ui/form";
 import { Input } from "../ui/input";
 import { LoadingButton } from "../ui/loading-button";
-import { toast } from "sonner";
-import { useRouter } from "next/navigation";
 import { PasswordInput } from "../ui/password-input";
 const loginSchema = z.object({
   email: z
@@ -31,14 +31,18 @@ const loginSchema = z.object({
 });
 
 type LoginSchema = z.infer<typeof loginSchema>;
-
 export const LoginForm = () => {
+  const queryClient = useQueryClient();
+
   const router = useRouter();
   const { mutate: _login, isPending } = useMutation({
     mutationFn: login,
     onSuccess: () => {
       toast.success("Login successfulll");
       router.push("/");
+      queryClient.invalidateQueries({
+        queryKey: ["me"],
+      });
     },
     onError: (err) => {
       toast.error(err.message);

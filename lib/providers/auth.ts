@@ -20,7 +20,15 @@ export const login = async ({ email, password }: LoginInput) => {
 export const register = async (input: DeepPartial<User>) => {
   try {
     const res = await api.post<ApiResponse<User>>("/users/create", input);
-    console.log(res);
+    return res.data;
+  } catch (err: any) {
+    throw new Error(err.response.data.message);
+  }
+};
+
+export const me = async () => {
+  try {
+    const res = await api.get<ApiResponse<User>>("/me");
     return res.data;
   } catch (err: any) {
     throw new Error(err.response.data.message);
