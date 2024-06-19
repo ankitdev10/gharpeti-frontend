@@ -26,7 +26,7 @@ const Search = ({ provider, onResultSelect }: SearchProps) => {
       provider,
       style: "bar",
       showMarker: false,
-      retainZoomLevel: false,
+      retainZoomLevel: true,
       animateZoom: true,
       autoClose: true,
       searchLabel: "Enter address",
@@ -79,8 +79,8 @@ export const MapComponent = ({
 
   return (
     <MapContainer
-      center={[28.3949, 84.124]}
-      zoom={1}
+      center={[27.69846675, 85.34062212453648]}
+      zoom={19}
       className={cn("h-full", className)}
     >
       <Search provider={provider} onResultSelect={handleResultSelect} />
