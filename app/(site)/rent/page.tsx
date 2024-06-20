@@ -1,5 +1,3 @@
-import { Map } from "@/components/map";
-
 export default function Rent() {
   return (
     <div className="p-12 bg-accent">
