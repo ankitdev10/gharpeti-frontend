@@ -1,7 +1,5 @@
 import { Filter } from "@/components/properties/filter";
-import { ProperyCardSkeleton } from "@/components/properties/propery-card-skeleton";
 import { SearchResult } from "@/lib/providers/search-result";
-import { Suspense } from "react";
 
 export default async function Rent({
   searchParams,
@@ -19,9 +17,7 @@ export default async function Rent({
       </div>
 
       <div className="px-12">
-        <Suspense fallback=<ProperyCardSkeleton />>
-          <SearchResult params={searchParams} />
-        </Suspense>
+        <SearchResult params={searchParams} />
       </div>
     </div>
   );
