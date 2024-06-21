@@ -4,14 +4,14 @@ import { cn } from "@/lib/utils";
 
 export const PropertyCard = ({ className }: { className?: string }) => {
   return (
-    <Card className={cn("w-60", className)}>
+    <Card className={cn("", className)}>
       <CardContent className="p-0">
         <div className="relative  aspect-video">
           <Image
             alt="Card-Image"
             fill
             src="/house.jpg"
-            className="object-cover"
+            className="object-cover rounded-lg"
             quality={80}
           />
         </div>
