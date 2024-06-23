@@ -11,7 +11,8 @@ import icon from "leaflet/dist/images/marker-icon.png";
 import iconShadow from "leaflet/dist/images/marker-shadow.png";
 export type MapProps = {
   className?: string;
-  onLocationSelect: (location: any) => void;
+  handleSelect?: (location: any) => void;
+  enableSearch?: boolean;
 };
 
 type SearchProps = {
@@ -63,7 +64,8 @@ const Search = ({ provider, onResultSelect }: SearchProps) => {
 
 export const MapComponent = ({
   className = undefined,
-  onLocationSelect,
+  handleSelect,
+  enableSearch = true,
 }: MapProps) => {
   const provider = new OpenStreetMapProvider({
     params: {
@@ -77,7 +79,7 @@ export const MapComponent = ({
 
   const handleResultSelect = (result: any) => {
     setSelectedLocation(result);
-    onLocationSelect(result);
+    typeof handleSelect !== "undefined" && handleSelect(result);
   };
 
   const reverseGeocode = async (latitude: number, longitude: number) => {
@@ -99,7 +101,7 @@ export const MapComponent = ({
     };
 
     setSelectedLocation(updatedLocation);
-    onLocationSelect(updatedLocation);
+    typeof handleSelect !== "undefined" && handleSelect(updatedLocation);
   };
 
   let DefaultIcon = L.icon({
@@ -112,7 +114,9 @@ export const MapComponent = ({
       zoom={19}
       className={cn("h-[300px]", className)}
     >
-      <Search provider={provider} onResultSelect={handleResultSelect} />
+      {enableSearch && (
+        <Search provider={provider} onResultSelect={handleResultSelect} />
+      )}
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

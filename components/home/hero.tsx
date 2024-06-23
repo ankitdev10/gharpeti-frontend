@@ -52,8 +52,8 @@ export const Hero = () => {
       <div className="relative h-full hidden md:block">
         <div className="absolute z-10 inset-0 before:content-[''] before:absolute before:inset-0 before:bg-[url('/hero-map2.jpg')] before:bg-cover before:blur-[1px] before:-z-10"></div>
         <div className="relative z-20 p-4  h-full">
-          <PropertyCard className="absolute -left-12" />
-          <PropertyCard className="absolute  -bottom-6 -right-6" />
+          {/* <PropertyCard className="absolute -left-12" /> */}
+          {/* <PropertyCard className="absolute  -bottom-6 -right-6" /> */}
         </div>
       </div>
     </div>

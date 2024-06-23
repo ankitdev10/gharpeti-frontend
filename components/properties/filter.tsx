@@ -53,7 +53,7 @@ export const Filter = () => {
             </DialogDescription>
           </DialogHeader>
           <Map
-            onLocationSelect={(e) => {
+            handleSelect={(e) => {
               console.log(e);
               setSelected((prev) => ({
                 ...prev,
