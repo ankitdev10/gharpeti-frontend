@@ -25,7 +25,7 @@ export const PropertyCard = ({
         </div>
         <div className="px-4 py-2">
           <h5 className="text-primary font-semibold text-lg">
-            {formatPrice(data.price)}
+            {formatPrice(data?.price)}
             <span className="text-xs text-muted-foreground">/ month</span>
           </h5>
 
@@ -37,7 +37,7 @@ export const PropertyCard = ({
           <div className="flex gap-4 items-center">
             <div className="text-xs text-muted-foreground flex space-x-1 items-center">
               <Image src="/door.svg" alt="house" width={20} height={20} />
-              <span>{data.rooms} rooms</span>
+              <span>{data?.rooms} rooms</span>
             </div>
             {/* <div className="text-xs text-muted-foreground flex space-x-1 items-center"> */}
             {/*   <Image src="/dimension.svg" alt="house" width={20} height={20} /> */}
