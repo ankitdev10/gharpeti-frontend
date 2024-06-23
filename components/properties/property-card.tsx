@@ -1,8 +1,16 @@
 import Image from "next/image";
 import { Card, CardContent } from "../ui/card";
 import { cn } from "@/lib/utils";
+import { formatPrice } from "@/lib/utils/formatPrice";
+import { Property } from "@/lib/providers/properties";
 
-export const PropertyCard = ({ className }: { className?: string }) => {
+export const PropertyCard = ({
+  className,
+  data,
+}: {
+  className?: string;
+  data: Property;
+}) => {
   return (
     <Card className={cn("", className)}>
       <CardContent className="p-0">
@@ -17,7 +25,7 @@ export const PropertyCard = ({ className }: { className?: string }) => {
         </div>
         <div className="px-4 py-2">
           <h5 className="text-primary font-semibold text-lg">
-            Rs 12,000{" "}
+            {formatPrice(data.price)}
             <span className="text-xs text-muted-foreground">/ month</span>
           </h5>
 
@@ -29,12 +37,12 @@ export const PropertyCard = ({ className }: { className?: string }) => {
           <div className="flex gap-4 items-center">
             <div className="text-xs text-muted-foreground flex space-x-1 items-center">
               <Image src="/door.svg" alt="house" width={20} height={20} />
-              <span>3 Rooms</span>
+              <span>{data.rooms} rooms</span>
             </div>
-            <div className="text-xs text-muted-foreground flex space-x-1 items-center">
-              <Image src="/dimension.svg" alt="house" width={20} height={20} />
-              <span>3 Rooms</span>
-            </div>
+            {/* <div className="text-xs text-muted-foreground flex space-x-1 items-center"> */}
+            {/*   <Image src="/dimension.svg" alt="house" width={20} height={20} /> */}
+            {/*   <span>3 Rooms</span> */}
+            {/* </div> */}
           </div>
         </div>
       </CardContent>

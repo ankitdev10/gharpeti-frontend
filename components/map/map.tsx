@@ -46,6 +46,7 @@ const Search = ({ provider, onResultSelect }: SearchProps) => {
 
     map.on("geosearch/showlocation", (result: any) => {
       if (result && result.location) {
+        console.log({ result });
         const { x, y, label } = result.location;
         onResultSelect({ latitude: y, longitude: x, address: label });
       }

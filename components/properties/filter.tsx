@@ -95,7 +95,7 @@ export const Filter = () => {
           }}
         >
           <SelectTrigger className="flex flex-col justify-center space-y-1 border-none ring-0">
-            <h5 className="text-muted-foreground">Location</h5>
+            <h5 className="text-muted-foreground">Price Range</h5>
             <h4 className="text-sm font-medium max-w-full">
               {selected?.price
                 ? `RS. ${selected.price.minPrice} - RS. ${selected.price.maxPrice}`
@@ -122,7 +122,7 @@ export const Filter = () => {
           }}
         >
           <SelectTrigger className="flex flex-col justify-center space-y-1 border-none ring-0">
-            <h5 className="text-muted-foreground">Location</h5>
+            <h5 className="text-muted-foreground">Rooms</h5>
             <h4 className="text-sm font-medium max-w-full">
               {selected?.rooms ?? "Select rooms"}
             </h4>

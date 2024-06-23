@@ -9,6 +9,15 @@ export const searchProperties = async (params: any) => {
   return res.data;
 };
 
+export const getProperty = async (id: string) => {
+  try {
+    const res = await api.get<ApiResponse<Property>>("/property/" + id);
+    return res.data;
+  } catch (err: any) {
+    throw new Error(err.response.data.message);
+  }
+};
+
 export interface Property {
   id: number;
   title: string;
