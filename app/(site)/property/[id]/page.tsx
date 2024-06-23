@@ -1,3 +1,5 @@
+import { Denied } from "@/components/denied";
+import { Bookmark } from "@/components/properties/bookmark";
 import { Carousel } from "@/components/properties/carousel/carousel";
 import { Avatar } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
@@ -63,11 +65,7 @@ const PropertyDetailPage = async ({
               {formatPrice(data.price) + " per month"}
             </h5>
           </div>
-          <div>
-            <Button variant="outline">
-              <BookmarkIcon />
-            </Button>
-          </div>
+          <Bookmark />
         </div>
 
         <div className="mt-4">

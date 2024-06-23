@@ -4,7 +4,7 @@ import { login } from "@/lib/providers/auth";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
@@ -33,16 +33,24 @@ const loginSchema = z.object({
 type LoginSchema = z.infer<typeof loginSchema>;
 export const LoginForm = () => {
   const queryClient = useQueryClient();
-
   const router = useRouter();
+  const params = useSearchParams();
+  const redirectUrl = params.get("redirect");
+
   const { mutate: _login, isPending } = useMutation({
     mutationFn: login,
     onSuccess: () => {
       toast.success("Login successfulll");
-      router.push("/");
+
       queryClient.invalidateQueries({
         queryKey: ["me"],
       });
+
+      if (redirectUrl) {
+        router.push(redirectUrl);
+        return;
+      }
+      router.push("/");
     },
     onError: (err) => {
       toast.error(err.message);

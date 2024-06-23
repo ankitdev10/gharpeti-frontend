@@ -86,7 +86,6 @@ export const RegisterForm = ({ type }: RegisterFormProps) => {
   });
 
   const onSubmit = (values: RegisterSchema) => {
-    console.log(values);
     mutate(values);
   };
   const rootError = form.formState.errors.root?.message;
