@@ -32,7 +32,7 @@ export const Profile = ({ user }: { user: User }) => {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger>
+      <DropdownMenuTrigger className="ring-0 border-0 outline-0">
         <Avatar>
           <AvatarImage src="https://github.com/shadcn.png" alt="PP" />
           <AvatarFallback className="text-muted-foreground">

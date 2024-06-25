@@ -1,10 +1,16 @@
-import { BookIcon, LogOut, Settings, User as UserIcon } from "lucide-react";
+import {
+  BookIcon,
+  BuildingIcon,
+  Settings,
+  User as UserIcon,
+} from "lucide-react";
 import { User } from "../providers/auth";
 
 interface DropdownItem {
   name: string;
   link: string;
   icon: any;
+  requireRoles: string[];
 }
 
 export const getDropDownItems = (user: User) => {
@@ -12,27 +18,38 @@ export const getDropDownItems = (user: User) => {
     {
       name: "Profile",
       icon: UserIcon,
-      link: `/profile/${user.id}`,
+      link: `/profile/${user?.id}`,
+      requireRoles: ["gharpeti", "customer"],
     },
 
     {
       name: "Settings",
       icon: Settings,
       link: "/settings",
+
+      requireRoles: ["gharpeti", "customer"],
     },
   ];
 
-  if (user.type === "gharpeti") {
-    common.splice(1, 0, {
+  if (user?.type === "gharpeti") {
+    common.splice(2, 0, {
       name: "Applications",
       icon: BookIcon,
-      link: "owner/applications",
+      link: "/profile/gharpeti/applications",
+      requireRoles: ["gharpeti"],
+    });
+    common.splice(1, 0, {
+      name: "My Properties",
+      icon: BuildingIcon,
+      link: "/profile/gharpeti/properties",
+      requireRoles: ["gharpeti"],
     });
   } else {
     common.splice(1, 0, {
       name: "My Applications",
       icon: BookIcon,
-      link: "profile/applications",
+      link: "profile/my/applications",
+      requireRoles: ["customer"],
     });
   }
 
