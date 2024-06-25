@@ -8,6 +8,7 @@ import { ModeToggle } from "./toggle";
 import { Button } from "./ui/button";
 import { useQuery } from "@tanstack/react-query";
 import { me } from "@/lib/providers/auth";
+import { Profile } from "./profile/profile";
 
 export const Navbar = () => {
   const pathname = usePathname();
@@ -53,7 +54,7 @@ export const Navbar = () => {
                 </Link>
               </div>
             ) : (
-              <h1>{data.data.fullName}</h1>
+              <Profile user={data.data} />
             )}
             <ModeToggle />
           </div>

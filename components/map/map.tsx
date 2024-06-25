@@ -13,7 +13,14 @@ export type MapProps = {
   className?: string;
   handleSelect?: (location: any) => void;
   enableSearch?: boolean;
+  location?: Location;
 };
+
+interface Location {
+  latitude: number;
+  longitude: number;
+  address: string;
+}
 
 type SearchProps = {
   provider: OpenStreetMapProvider;
@@ -65,17 +72,22 @@ const Search = ({ provider, onResultSelect }: SearchProps) => {
 export const MapComponent = ({
   className = undefined,
   handleSelect,
+  location,
   enableSearch = true,
 }: MapProps) => {
   const provider = new OpenStreetMapProvider({
     params: {
-      countrycodes: "NP", // Country code for Nepal
-      viewbox: "80.058,30.447,88.199,26.347", // Bounding box for Nepal
-      bounded: 1, // Restrict results to the bounding box
+      countrycodes: "NP",
+      viewbox: "80.058,30.447,88.199,26.347",
+      bounded: 1,
     },
   });
 
-  const [selectedLocation, setSelectedLocation] = useState<any>(null);
+  const [selectedLocation, setSelectedLocation] = useState<Location | null>(
+    location ? location : null,
+  );
+
+  console.log({ selectedLocation });
 
   const handleResultSelect = (result: any) => {
     setSelectedLocation(result);
@@ -110,7 +122,11 @@ export const MapComponent = ({
   });
   return (
     <MapContainer
-      center={[27.69846675, 85.34062212453648]}
+      center={
+        location
+          ? [location.latitude, location.longitude]
+          : [27.69846675, 85.34062212453648]
+      }
       zoom={19}
       className={cn("h-[300px]", className)}
     >

@@ -35,6 +35,19 @@ export const me = async () => {
   }
 };
 
+export const logout = async () => {
+  try {
+    const res = await api.post<ApiResponse<any>>("/logout");
+    if (res.data.status === 200) {
+      localStorage.removeItem(AUTH_TOKEN_KEY);
+    }
+
+    return res.data;
+  } catch (err: any) {
+    throw new Error(err.response.data.message);
+  }
+};
+
 type LoginInput = {
   email: string;
   password: string;

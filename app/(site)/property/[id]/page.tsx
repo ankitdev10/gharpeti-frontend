@@ -1,4 +1,3 @@
-import { Denied } from "@/components/denied";
 import { Map } from "@/components/map";
 import { Bookmark } from "@/components/properties/bookmark";
 import { Carousel } from "@/components/properties/carousel/carousel";
@@ -14,7 +13,7 @@ import {
 import { getProperty } from "@/lib/providers/properties";
 import { formatPrice } from "@/lib/utils/formatPrice";
 import { AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
-import { BookmarkIcon, ChevronLeft } from "lucide-react";
+import { ChevronLeft } from "lucide-react";
 import Link from "next/link";
 
 const PropertyDetailPage = async ({
@@ -35,7 +34,7 @@ const PropertyDetailPage = async ({
   ];
 
   return (
-    <section className="px-24 py-2 grid grid-cols-2 gap-8">
+    <section className="px-12 py-2 grid grid-cols-2 gap-8">
       <div className="">
         <div className="flex gap-x-12 items-center">
           <div className="space-y-1">
@@ -141,7 +140,17 @@ const PropertyDetailPage = async ({
           </CardContent>
         </Card>
 
-        <Map enableSearch={false} />
+        <div>
+          <h2 className="text-xl font-semibold mb-4">Location</h2>
+          <Map
+            location={{
+              longitude: data.longitude,
+              latitude: data.latitude,
+              address: "hehehehe",
+            }}
+            enableSearch={false}
+          />
+        </div>
       </div>
     </section>
   );
