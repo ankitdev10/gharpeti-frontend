@@ -10,7 +10,7 @@ export function Register() {
     "gharpeti" | "customer"
   >();
   return (
-    <div className=" flex flex-col max-h-screen justify-center  items-center p-8 md:p-12">
+    <div className=" flex flex-col min-h-screen justify-center  items-center p-8 md:p-12">
       <div className="space-y-6 w-full">
         <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-center">
           Join Us

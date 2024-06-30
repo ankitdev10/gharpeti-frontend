@@ -12,14 +12,6 @@ const AuthLayout = ({ children }: { children: React.ReactNode }) => {
                 Embark on a journey through the ever-changing realms of the
                 homes.
               </p>
-              {/* <div className="relative w-full aspect-video"> */}
-              {/*   <Image */}
-              {/*     src="/register.jpg" */}
-              {/*     alt="Fantasy Illustration" */}
-              {/*     fill */}
-              {/*     className="rounded-lg" */}
-              {/*   /> */}
-              {/* </div> */}
             </div>
           </div>
           {children}
