@@ -15,8 +15,8 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Gharpeti",
-  description: "Gharpeti",
+  title: "Gharbheti",
+  description: "Gharbheti",
 };
 
 export default function RootLayout({

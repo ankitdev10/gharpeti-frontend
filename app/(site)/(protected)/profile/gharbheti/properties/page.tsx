@@ -1,3 +1,5 @@
+import { OwnerProperty } from "@/components/properties/owner-property";
+
 const GharpetiProperties = () => {
   return (
     <div className="px-12 bg-muted py-8">
@@ -8,6 +10,8 @@ const GharpetiProperties = () => {
           (Only a maximum of 4 properties are allowed to be listed)
         </span>
       </h5>
+
+      <OwnerProperty />
     </div>
   );
 };

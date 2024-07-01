@@ -18,6 +18,15 @@ export const getProperty = async (id: string) => {
   }
 };
 
+export const getProperyOfOwner = async () => {
+  try {
+    const res = await api.get<ApiResponse<Property[]>>("/property/owner/all");
+    return res.data;
+  } catch (err: any) {
+    throw new Error(err.response.data.message);
+  }
+};
+
 export interface Property {
   id: number;
   title: string;
@@ -26,6 +35,7 @@ export interface Property {
   latitude: number;
   longitude: number;
   ownerId: number;
+  enabled: boolean;
   rooms: number;
   price: number;
   owner: User;

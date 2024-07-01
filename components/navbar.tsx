@@ -22,7 +22,7 @@ export const Navbar = () => {
     <header className="hidden min-h-[65px] md:grid border-b">
       <nav className="flex max-w-[1440px] w-full pr-24 gap-x-28 mx-auto items-center py-3">
         <h1 className="text-2xl text-primary font-medium">
-          <Link href="/">Gharpeti</Link>
+          <Link href="/">Gharbheti</Link>
         </h1>
         <ul className="flex items-center space-x-8">
           {navItems.map((item) => (

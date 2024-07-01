@@ -32,16 +32,16 @@ export const getDropDownItems = (user: User) => {
   ];
 
   if (user?.type === "gharpeti") {
-    common.splice(2, 0, {
-      name: "Applications",
-      icon: BookIcon,
-      link: "/profile/gharpeti/applications",
-      requireRoles: ["gharpeti"],
-    });
     common.splice(1, 0, {
       name: "My Properties",
       icon: BuildingIcon,
-      link: "/profile/gharpeti/properties",
+      link: "/profile/gharbheti/properties",
+      requireRoles: ["gharpeti"],
+    });
+    common.splice(2, 0, {
+      name: "Applications",
+      icon: BookIcon,
+      link: "/profile/gharbheti/applications",
       requireRoles: ["gharpeti"],
     });
   } else {
