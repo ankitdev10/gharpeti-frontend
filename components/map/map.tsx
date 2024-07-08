@@ -16,7 +16,7 @@ export type MapProps = {
   location?: Location;
 };
 
-interface Location {
+export interface Location {
   latitude: number;
   longitude: number;
   address: string;
@@ -89,7 +89,7 @@ export const MapComponent = ({
 
   console.log({ selectedLocation });
 
-  const handleResultSelect = (result: any) => {
+  const handleResultSelect = (result: Location) => {
     setSelectedLocation(result);
     typeof handleSelect !== "undefined" && handleSelect(result);
   };

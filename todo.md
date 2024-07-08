@@ -1,0 +1,4 @@
+- Error boundary for /edit/:id page
+- image upload
+- applications
+- featured property in home page

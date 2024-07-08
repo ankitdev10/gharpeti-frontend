@@ -58,7 +58,7 @@ const PropertyDetailPage = async ({
             </h1>
 
             <h4 className="text font-medium text-muted-foreground ">
-              Kathmandu, Teset, test, test, teest
+              {data.location}
             </h4>
 
             <h5 className="text-primary text-2xl font-semibold">
@@ -75,38 +75,17 @@ const PropertyDetailPage = async ({
 
       <div className="scrollbar shadow-lg overflow-y-scroll max-h-[calc(100vh-100px)] p-4 sticky space-y-4 right-8">
         <h2 className="text-xl font-semibold mb-4">About the home</h2>
-        <p className="text-muted-foreground text-justify">
-          But I must explain to you how all this mistaken idea of denouncing
-          pleasure and praising pain was born and I will give you a complete
-          account of the system, and expound the actual teachings of the great
-          explorer of the truth, the master-builder of human happiness. No one
-          rejects, dislikes, or avoids pleasure itself, because it is pleasure,
-          but because those who do not know how to pursue pleasure rationally
-          encounter consequences that are extremely painful. Nor again is there
-          anyone who loves or pursues or desires to obtain pain of itself,
-        </p>
+        <p className="text-muted-foreground text-justify">{data.description}</p>
 
         <div>
           <h2 className="text-xl font-semibold mb-4">Other Attributes</h2>
-
           <div className="border divide-y">
-            <div className="grid grid-cols-2">
-              <h6 className="border-r bg-muted p-2">key</h6>
-              <h6 className=" p-2">value</h6>
-            </div>
-            <div className="grid grid-cols-2">
-              <h1 className="border-r bg-muted p-2">key</h1>
-              <h1 className=" p-2">value</h1>
-            </div>
-
-            <div className="grid grid-cols-2">
-              <h1 className="border-r bg-muted p-2">key</h1>
-              <h1 className=" p-2">value</h1>
-            </div>
-            <div className="grid grid-cols-2">
-              <h1 className="border-r bg-muted p-2">key</h1>
-              <h1 className=" p-2">value</h1>
-            </div>
+            {data.attributes.map((data, index) => (
+              <div key={data.key + index} className="grid grid-cols-2">
+                <h6 className="border-r bg-muted p-2">{data.key}</h6>
+                <h6 className=" p-2">{data.value}</h6>
+              </div>
+            ))}
           </div>
         </div>
 

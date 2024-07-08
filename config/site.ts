@@ -11,10 +11,6 @@ export const navItems = [
     name: "Rent",
     href: "/rent",
   },
-  {
-    name: "Sell",
-    href: "/sell",
-  },
 ];
 
 export type NavItems = typeof navItems;

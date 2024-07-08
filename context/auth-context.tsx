@@ -35,6 +35,11 @@ export const AuthContextProvider = ({
         const routes = getDropDownItems(data.data);
         const currentRoute = routes.find((r) => r.link === pathname);
 
+        if (!currentRoute) {
+          setIsAuthorized(true);
+          return;
+        }
+
         if (currentRoute?.requireRoles.includes(data.data.type)) {
           setIsAuthorized(true);
         } else {

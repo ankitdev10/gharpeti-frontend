@@ -6,6 +6,7 @@ import { Button } from "../ui/button";
 import { Badge } from "../ui/badge";
 import { Map } from "../map";
 import { EditIcon, LocateFixedIcon, LocateIcon, Pin } from "lucide-react";
+import Link from "next/link";
 
 export const OwnerProperty = () => {
   const { data, isLoading } = useQuery({
@@ -19,7 +20,7 @@ export const OwnerProperty = () => {
         ? "loading"
         : data?.data.map((data) => (
             <div
-              className="border p-4 rounded-md grid grid-cols-2 gap-12"
+              className="border p-4 mt-8 rounded-md grid grid-cols-2 gap-12"
               key={data.id}
             >
               <div>
@@ -82,10 +83,15 @@ export const OwnerProperty = () => {
                   </div>
                 </div>
 
-                <Button className="space-x-2 flex items-center">
-                  <EditIcon size={16} />
-                  <span>Edit</span>
-                </Button>
+                <Link
+                  className=""
+                  href={`/profile/gharbheti/properties/edit/${data.id}`}
+                >
+                  <Button className="mt-4 space-x-2 flex items-center">
+                    <EditIcon size={16} />
+                    <span>Edit</span>
+                  </Button>
+                </Link>
               </div>
             </div>
           ))}

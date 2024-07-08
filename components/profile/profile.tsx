@@ -47,18 +47,18 @@ export const Profile = ({ user }: { user: User }) => {
         {dropdownItems?.map((d) => {
           const Icon = d.icon;
           return (
-            <>
+            <div key={d.name}>
               <Link href={d.link}>
-                <DropdownMenuItem key={d.name}>
+                <DropdownMenuItem className="cursor-pointer" key={d.name}>
                   <Icon className="mr-2 size-4" />
                   <span>{d.name}</span>
                 </DropdownMenuItem>
               </Link>
               <DropdownMenuSeparator />
-            </>
+            </div>
           );
         })}
-        <DropdownMenuItem onClick={() => mutate()}>
+        <DropdownMenuItem className="cursor-pointer" onClick={() => mutate()}>
           <LogOut className="mr-2 size-4" />
           <span>Log out</span>
         </DropdownMenuItem>
