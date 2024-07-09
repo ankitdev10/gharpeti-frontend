@@ -48,7 +48,7 @@ export const getDropDownItems = (user: User) => {
     common.splice(1, 0, {
       name: "My Applications",
       icon: BookIcon,
-      link: "profile/my/applications",
+      link: "/profile/my/applications",
       requireRoles: ["customer"],
     });
   }

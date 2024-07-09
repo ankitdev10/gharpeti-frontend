@@ -1,3 +1,4 @@
+import { Apply } from "@/components/applications/apply";
 import { Map } from "@/components/map";
 import { Bookmark } from "@/components/properties/bookmark";
 import { Carousel } from "@/components/properties/carousel/carousel";
@@ -118,6 +119,13 @@ const PropertyDetailPage = async ({
             </div>
           </CardContent>
         </Card>
+
+        <div>
+          <Apply
+            propertyId={Number(params.id)}
+            price={Number(data?.price) / 100}
+          />
+        </div>
 
         <div>
           <h2 className="text-xl font-semibold mb-4">Location</h2>

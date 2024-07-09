@@ -1,6 +1,6 @@
 import { ApplicationsTable } from "@/components/applications/application-table";
 
-const MyApplicationsPage = async () => {
+const MyApplicationsPageOwner = async () => {
   return (
     <section className="px-24 py-12">
       <ApplicationsTable />
@@ -8,4 +8,4 @@ const MyApplicationsPage = async () => {
   );
 };
 
-export default MyApplicationsPage;
+export default MyApplicationsPageOwner;

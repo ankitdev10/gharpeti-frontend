@@ -2,3 +2,6 @@
 - image upload
 - applications
 - featured property in home page
+- max password 16 chars
+- location may fail because of varchar:255
+- reset filter
