@@ -31,7 +31,6 @@ export const ApplicationsTable = () => {
       type === "gharpeti" ? getOwnerApplications() : getUserApplications(),
   });
 
-  console.log(data);
   return (
     <div>
       <Table>

@@ -80,6 +80,7 @@ export const PropertyForm = ({
   const router = useRouter();
   const [files, setFiles] = useState<File[] | null>([]);
   const form = useForm<PropertySchema>({
+    mode: "onChange",
     resolver: zodResolver(propertySchema),
     defaultValues: {
       title: property?.title ?? "",
@@ -223,7 +224,8 @@ export const PropertyForm = ({
               <FormLabel>Description</FormLabel>
               <FormControl>
                 <textarea
-                  className="block"
+                  rows={8}
+                  className="block w-full p-1 border"
                   {...field}
                   placeholder="Property Description"
                 />

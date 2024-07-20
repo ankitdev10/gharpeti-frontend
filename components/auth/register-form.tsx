@@ -25,10 +25,11 @@ const registerSchema = z
   .object({
     fullName: z
       .string()
-      .min(5, {
-        message: "Full name must be atleast 5 characters",
-      })
-      .max(100),
+      .min(3, { message: "Full name must be at least 3 characters" })
+      .max(100)
+      .refine((value) => value.trim().split(/\s+/).length >= 2, {
+        message: "Full name must contain at least two words",
+      }),
     email: z
       .string()
       .email()
@@ -42,8 +43,17 @@ const registerSchema = z
         message: "Password is required",
       })
       .max(100),
-    confirmPassword: z.string().min(6).max(100),
-    phone: z.string().min(10, { message: "Phone number is required" }).max(100),
+    confirmPassword: z
+      .string()
+      .min(6, {
+        message: "Password must be atleast 6 charecters",
+      })
+      .max(32, {
+        message: "Password can not exceed 32 charecters",
+      }),
+    phone: z.string().regex(/^\d{10}$/, {
+      message: "Invalid Phone Number",
+    }),
     location: z.string().min(1, { message: "Location is required" }),
     type: z.enum(["gharpeti", "customer"]),
   })
@@ -61,6 +71,7 @@ export const RegisterForm = ({ type }: RegisterFormProps) => {
   const router = useRouter();
 
   const form = useForm<RegisterSchema>({
+    mode: "onChange",
     resolver: zodResolver(registerSchema),
     defaultValues: {
       fullName: "",
@@ -207,7 +218,7 @@ export const RegisterForm = ({ type }: RegisterFormProps) => {
           loading={isPending}
           defaultText="Register"
           loadingText="Registering.."
-          disabled={isPending || !form.formState.isValid}
+          // disabled={isPending || !form.formState.isValid}
         />
         <h4 className="text-sm">
           Already have an account?{" "}

@@ -29,8 +29,9 @@ export const PropertyCard = ({
             <span className="text-xs text-muted-foreground">/ month</span>
           </h5>
 
-          <h5 className="font-bold text-lg">Kathmandu, Nepal</h5>
-          <h6 className="text-sm text-muted-foreground">Kharibot, Kathmandu</h6>
+          <h5 className="font-bold text-lg">
+            {data?.location.split(",").slice(0, 1).join("")}
+          </h5>
 
           <hr className="my-3" />
 

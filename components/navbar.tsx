@@ -14,6 +14,7 @@ export const Navbar = () => {
   const pathname = usePathname();
 
   const { data } = useQuery({
+    refetchInterval: 5000,
     queryKey: ["me"],
     queryFn: () => me(),
   });

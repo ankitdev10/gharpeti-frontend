@@ -8,10 +8,10 @@ import { toast } from "sonner";
 
 export const Denied = ({
   children,
-  onClick,
+  handleEvent,
 }: {
   children: React.ReactNode;
-  onClick: () => void;
+  handleEvent?: () => void;
 }) => {
   const { data } = useQuery({
     queryKey: ["me"],
@@ -22,15 +22,18 @@ export const Denied = ({
 
   const router = useRouter();
   const handleClick = (e: React.MouseEvent) => {
-    e.preventDefault();
+    console.log("here");
     const authorized = data?.status === 200;
-    if (authorized) {
-      onClick();
-    } else {
+    if (!authorized) {
+      e.preventDefault();
       router.push(`/login?redirect=${pathname}`, {
         scroll: false,
       });
       toast("Please log in first to continue with this action.");
+    }
+
+    if (typeof handleEvent !== "undefined") {
+      handleEvent();
     }
   };
   return (

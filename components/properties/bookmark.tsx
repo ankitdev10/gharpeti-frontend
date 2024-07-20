@@ -7,7 +7,7 @@ import { Button } from "../ui/button";
 export const Bookmark = () => {
   const handleClick = () => {};
   return (
-    <Denied onClick={handleClick}>
+    <Denied handleEvent={handleClick}>
       <Button variant="outline">
         <BookmarkIcon />
       </Button>
