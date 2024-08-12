@@ -3,6 +3,7 @@ import { Card, CardContent } from "../ui/card";
 import { cn } from "@/lib/utils";
 import { formatPrice } from "@/lib/utils/formatPrice";
 import { Property } from "@/lib/providers/properties";
+import { MapPin } from "lucide-react";
 
 export const PropertyCard = ({
   className,
@@ -23,15 +24,19 @@ export const PropertyCard = ({
             quality={80}
           />
         </div>
-        <div className="px-4 py-2">
-          <h5 className="text-primary font-semibold text-lg">
+        <div className="px-4 py-2 space-y-1">
+          <h4 className="text-primary font-semibold text-lg">
             {formatPrice(data?.price)}
             <span className="text-xs text-muted-foreground">/ month</span>
-          </h5>
+          </h4>
+          <h5 className="font-semibold text-lg">{data?.title}</h5>
 
-          <h5 className="font-bold text-lg">
-            {data?.location.split(",").slice(0, 1).join("")}
-          </h5>
+          <div className="flex items-center space-x-2">
+            <MapPin />
+            <h6 className="text-sm font-medium">
+              {data?.location.split(",").slice(0, 1).join("")}
+            </h6>
+          </div>
 
           <hr className="my-3" />
 
