@@ -14,7 +14,7 @@ import {
 import { getProperty } from "@/lib/providers/properties";
 import { formatPrice } from "@/lib/utils/formatPrice";
 import { AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
-import { ChevronLeft } from "lucide-react";
+import { ChevronLeft, MapPin } from "lucide-react";
 import Link from "next/link";
 
 const PropertyDetailPage = async ({
@@ -38,7 +38,7 @@ const PropertyDetailPage = async ({
     <section className="px-12 py-2 grid grid-cols-2 gap-8">
       <div className="">
         <div className="flex gap-x-12 items-center">
-          <div className="space-y-1">
+          <div className="">
             <Link href={"/rent"}>
               <Button
                 variant="ghost"
@@ -53,23 +53,27 @@ const PropertyDetailPage = async ({
                 </span>
               </Button>
             </Link>
+            <div className="space-y-6 mt-12">
+              <h1 className="text-4xl font-semibold tracking-wide">
+                {data.title}
+              </h1>
 
-            <h1 className="text-4xl font-semibold tracking-wide">
-              {data.title}
-            </h1>
+              <div className="flex items-center gap-x-4">
+                <MapPin className="text-primary" size={40} />
+                <h4 className="text font-medium text-muted-foreground ">
+                  {data.location}
+                </h4>
+              </div>
 
-            <h4 className="text font-medium text-muted-foreground ">
-              {data.location}
-            </h4>
-
-            <h5 className="text-primary text-2xl font-semibold">
-              {formatPrice(data.price) + " per month"}
-            </h5>
+              <h5 className="text-primary text-2xl font-semibold">
+                {formatPrice(data.price) + " per month"}
+              </h5>
+            </div>
           </div>
           <Bookmark />
         </div>
 
-        <div className="mt-4">
+        <div className="mt-8">
           <Carousel slides={images} options={{}} />
         </div>
       </div>

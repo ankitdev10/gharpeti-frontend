@@ -38,6 +38,7 @@ import {
 } from "../ui/table";
 import { Uploader } from "../upload";
 import { Switch } from "./switch";
+import { ImagePreview } from "../image-preview";
 
 const propertySchema = z.object({
   title: z.string().min(1, {
@@ -267,9 +268,86 @@ export const PropertyForm = ({
             </FormItem>
           )}
         />
+        <div className="flex flex-row space-x-6 flex-wrap">
+          {property?.images &&
+            property.images.map((image, index) => (
+              <ImagePreview key={index} link={image} />
+            ))}
+        </div>
         <div>
           <FormLabel>Upload Images </FormLabel>
           <Uploader multiple fn={(e) => setFiles(e)} />
+        </div>
+        <div className="mt-8">
+          <FormLabel>Attributes</FormLabel>
+          <Table>
+            <TableCaption>Add Attributes</TableCaption>
+            <TableHeader>
+              <TableRow>
+                <TableHead>Title</TableHead>
+                <TableHead>Description</TableHead>
+                <TableHead>Delete</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {fields.map((item, index) => (
+                <TableRow key={item.id}>
+                  <TableCell>
+                    <FormField
+                      name={`attributes.${index}.key`}
+                      control={form.control}
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormControl>
+                            <Input {...field} />
+                          </FormControl>
+                        </FormItem>
+                      )}
+                    />
+                  </TableCell>
+
+                  <TableCell>
+                    <FormField
+                      name={`attributes.${index}.value`}
+                      control={form.control}
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormControl>
+                            <Input {...field} />
+                          </FormControl>
+                        </FormItem>
+                      )}
+                    />
+                  </TableCell>
+                  <TableCell>
+                    <TrashIcon
+                      color="red"
+                      size={16}
+                      className="cursor-pointer"
+                      onClick={() => remove(index)}
+                    />
+                  </TableCell>
+                </TableRow>
+              ))}
+
+              <TableRow>
+                <TableCell className="text-right" colSpan={4}>
+                  <Button
+                    variant="outline"
+                    type="button"
+                    onClick={() =>
+                      append({
+                        key: "",
+                        value: "",
+                      })
+                    }
+                  >
+                    Add More
+                  </Button>
+                </TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
         </div>
         <div>
           <FormField
@@ -286,77 +364,10 @@ export const PropertyForm = ({
               </FormItem>
             )}
           />
-          <div className="mt-8">
-            <FormLabel>Attributes</FormLabel>
-            <Table>
-              <TableCaption>Add Attributes</TableCaption>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>Title</TableHead>
-                  <TableHead>Description</TableHead>
-                  <TableHead>Delete</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {fields.map((item, index) => (
-                  <TableRow key={item.id}>
-                    <TableCell>
-                      <FormField
-                        name={`attributes.${index}.key`}
-                        control={form.control}
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormControl>
-                              <Input {...field} />
-                            </FormControl>
-                          </FormItem>
-                        )}
-                      />
-                    </TableCell>
 
-                    <TableCell>
-                      <FormField
-                        name={`attributes.${index}.value`}
-                        control={form.control}
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormControl>
-                              <Input {...field} />
-                            </FormControl>
-                          </FormItem>
-                        )}
-                      />
-                    </TableCell>
-                    <TableCell>
-                      <TrashIcon
-                        color="red"
-                        size={16}
-                        className="cursor-pointer"
-                        onClick={() => remove(index)}
-                      />
-                    </TableCell>
-                  </TableRow>
-                ))}
-
-                <TableRow>
-                  <TableCell className="text-right" colSpan={4}>
-                    <Button
-                      variant="outline"
-                      type="button"
-                      onClick={() =>
-                        append({
-                          key: "",
-                          value: "",
-                        })
-                      }
-                    >
-                      Add More
-                    </Button>
-                  </TableCell>
-                </TableRow>
-              </TableBody>
-            </Table>
-          </div>
+          <h5 className="mt-8 font-medium text-sm text-muted-foreground ">
+            Pro Tip: Drag marker below to set location accurately
+          </h5>
           <div className="mt-8">
             <Map
               location={
@@ -377,7 +388,6 @@ export const PropertyForm = ({
             />
           </div>
         </div>
-
         <LoadingButton
           type="submit"
           loading={isPending}

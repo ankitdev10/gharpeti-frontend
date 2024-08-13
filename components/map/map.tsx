@@ -6,7 +6,7 @@ import "leaflet-geosearch/dist/geosearch.css";
 import "leaflet/dist/leaflet.css";
 import { useEffect, useState } from "react";
 import { MapContainer, Marker, Popup, TileLayer, useMap } from "react-leaflet";
-import L from "leaflet";
+import L, { LatLngExpression } from "leaflet";
 import icon from "leaflet/dist/images/marker-icon.png";
 import iconShadow from "leaflet/dist/images/marker-shadow.png";
 export type MapProps = {
@@ -120,12 +120,15 @@ export const MapComponent = ({
     iconUrl: icon.src,
     shadowUrl: iconShadow.src,
   });
+
+  const DEFAULT_LOCATION = [27.7172, 85.3172];
+
   return (
     <MapContainer
       center={
         location
           ? [location.latitude, location.longitude]
-          : [27.69846675, 85.34062212453648]
+          : (DEFAULT_LOCATION as LatLngExpression)
       }
       zoom={19}
       className={cn("h-[300px]", className)}
@@ -137,22 +140,24 @@ export const MapComponent = ({
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      {selectedLocation && (
-        <Marker
-          position={[selectedLocation.latitude, selectedLocation.longitude]}
-          draggable={true}
-          icon={DefaultIcon}
-          eventHandlers={{
-            dragend: handleDragEnd,
-          }}
-        >
-          <Popup>
-            {selectedLocation.address} <br />
-            Latitude: {selectedLocation.latitude} <br />
-            Longitude: {selectedLocation.longitude}
-          </Popup>
-        </Marker>
-      )}
+      <Marker
+        position={
+          selectedLocation
+            ? [selectedLocation.latitude, selectedLocation.longitude]
+            : (DEFAULT_LOCATION as LatLngExpression)
+        }
+        draggable={true}
+        icon={DefaultIcon}
+        eventHandlers={{
+          dragend: handleDragEnd,
+        }}
+      >
+        <Popup>
+          {selectedLocation?.address} <br />
+          Latitude: {selectedLocation?.latitude} <br />
+          Longitude: {selectedLocation?.longitude}
+        </Popup>
+      </Marker>
     </MapContainer>
   );
 };

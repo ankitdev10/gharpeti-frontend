@@ -19,7 +19,10 @@ export const SearchResult = ({ params }: any) => {
         <div className="grid grid-cols-3 gap-16">
           {data?.data.map((d) => (
             <Link href={`property/${d.id}`} key={d.id}>
-              <PropertyCard data={d} className="hover:scale-105" key={d.id} />
+              <PropertyCard
+                data={d}
+                className="hover:scale-105 transition-all duration-300"
+              />
             </Link>
           ))}
         </div>
