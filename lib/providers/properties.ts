@@ -42,16 +42,25 @@ export const updateProperty = async (data: UpdatePropertyInput) => {
 export const createProperty = async (data: UpdatePropertyInput) => {
   try {
     console.log(data);
-    const res = await api.post<ApiResponse<Property[]>>(
-      "/property/create",
-      data,
-    );
+    const res = await api.post<ApiResponse<Property>>("/property/create", data);
     return res.data;
   } catch (err: any) {
+    console.log(err.response.data.message);
     throw new Error(err.response.data.message);
   }
 };
 
+export const uploadPictures = async (formData: FormData, id: string) => {
+  try {
+    const res = await api.post<ApiResponse<string[]>>(
+      `/property/upload/${id}`,
+      formData,
+    );
+    return res.data;
+  } catch (err: any) {
+    throw new Error(err);
+  }
+};
 export interface Property {
   id: number;
   title: string;

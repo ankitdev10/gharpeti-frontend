@@ -13,19 +13,20 @@ import {
   Property,
   createProperty,
   updateProperty,
+  uploadPictures,
 } from "@/lib/providers/properties";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
+import { TrashIcon } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 import { Map } from "../map/index";
 import { Location } from "../map/map";
+import { Button } from "../ui/button";
 import { LoadingButton } from "../ui/loading-button";
-import { Switch } from "./switch";
-import { Uploader } from "../upload";
-import { useRouter } from "next/navigation";
 import {
   Table,
   TableBody,
@@ -35,8 +36,8 @@ import {
   TableHeader,
   TableRow,
 } from "../ui/table";
-import { TrashIcon } from "lucide-react";
-import { Button } from "../ui/button";
+import { Uploader } from "../upload";
+import { Switch } from "./switch";
 
 const propertySchema = z.object({
   title: z.string().min(1, {
@@ -45,14 +46,10 @@ const propertySchema = z.object({
   description: z.string().min(1, {
     message: "Description is required",
   }),
-  location: z
-    .string()
-    .max(255, { message: "Location must be 255 characters or less" }),
-  // .nonempty({ message: "Location is required" })
+  location: z.string(),
   latitude: z.number({ required_error: "Latitude is required" }),
   longitude: z.number({ required_error: "Longitude is required" }),
   enabled: z.boolean().optional(),
-  images: z.array(z.string()).optional(),
   rooms: z.coerce.number({ required_error: "Rooms are required" }),
   price: z.coerce
     .number({ required_error: "Price is required" })
@@ -89,7 +86,6 @@ export const PropertyForm = ({
       latitude: property?.latitude ?? 0,
       longitude: property?.longitude ?? 0,
       enabled: property?.enabled ?? true,
-      images: property?.images ?? [],
       rooms: property?.rooms ?? 0,
       price: (property?.price ?? 0) / 100 ?? 0,
       attributes: property?.attributes ?? [
@@ -110,19 +106,25 @@ export const PropertyForm = ({
   });
 
   const onSubmit = async (values: PropertySchema) => {
-    console.log(values);
+    if (!values.location) {
+      toast.error("Location is required");
+      return;
+    }
     if (id) {
       const res = await update({
         id: parseInt(id),
         ...values,
       });
       if (res.status === 200) {
+        console.log(res.data, "data");
         toast.success("Updated Successfully");
+        // await uploadImages(id);
         router.refresh();
       }
     } else {
       const res = await createProperty(values);
       if (res.data) {
+        await uploadImages(res.data.id + "");
         toast.success("Property created successfully");
         router.push("/profile/gharbheti/properties");
       }
@@ -132,6 +134,20 @@ export const PropertyForm = ({
     control: form.control,
     name: "attributes",
   });
+
+  const uploadImages = async (id: string) => {
+    if (!files) return;
+    try {
+      const formData = new FormData();
+      files.forEach((file) => formData.append("images", file));
+      const res = await uploadPictures(formData, id);
+      return res.data;
+    } catch (err: any) {
+      throw new Error(err.response.data.message);
+    }
+  };
+
+  console.log(form.formState.errors, "errors", form.formState.isValid);
 
   return (
     <Form {...form}>
@@ -253,7 +269,7 @@ export const PropertyForm = ({
         />
         <div>
           <FormLabel>Upload Images </FormLabel>
-          <Uploader fn={(e) => console.log(e)} />
+          <Uploader multiple fn={(e) => setFiles(e)} />
         </div>
         <div>
           <FormField
@@ -264,7 +280,7 @@ export const PropertyForm = ({
               <FormItem>
                 <FormLabel>Location</FormLabel>
                 <FormControl>
-                  <Input disabled {...field} placeholder="Property Location" />
+                  <Input readOnly {...field} placeholder="Property Location" />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -353,6 +369,7 @@ export const PropertyForm = ({
                   : undefined
               }
               handleSelect={(e: Location) => {
+                console.log(e);
                 form.setValue("longitude", e.longitude);
                 form.setValue("latitude", e.latitude);
                 form.setValue("location", e.address);
