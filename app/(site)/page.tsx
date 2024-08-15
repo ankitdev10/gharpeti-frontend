@@ -2,6 +2,7 @@ import { Hero } from "@/components/home/hero";
 import { Promotion } from "@/components/home/promotion";
 import { LatestProperties } from "@/components/properties/latest-properties";
 import { getLatestProperties } from "@/lib/providers/properties";
+import { Suspense } from "react";
 
 export default async function Page() {
   const { data } = await getLatestProperties();
@@ -9,7 +10,9 @@ export default async function Page() {
     <>
       <Hero />
       <Promotion />
-      <LatestProperties properties={data} />
+      <Suspense>
+        <LatestProperties properties={data} />
+      </Suspense>
     </>
   );
 }
