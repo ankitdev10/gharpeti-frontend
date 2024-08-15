@@ -1,7 +1,7 @@
 - Error boundary for /edit/:id page
-- image upload
 - applications
 - featured property in home page
 - max password 16 chars
 - location may fail because of varchar:255
 - reset filter
+- user able to update application if replied (add change_requested status)

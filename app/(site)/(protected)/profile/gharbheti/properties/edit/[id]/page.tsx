@@ -3,6 +3,8 @@ import { getProperty } from "@/lib/providers/properties";
 
 export default async function EditPropertyPage({ params }: any) {
   const property = await getProperty(params.id);
+
+  console.log(property, "property");
   if (!property) {
     return <h1>Nope</h1>;
   }

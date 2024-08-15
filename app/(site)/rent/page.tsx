@@ -1,3 +1,4 @@
+import { Chips } from "@/components/properties/chips";
 import { Filter } from "@/components/properties/filter";
 import { SearchResult } from "@/lib/providers/search-result";
 
@@ -15,6 +16,10 @@ export default async function Rent({
       <div className="">
         <Filter />
       </div>
+
+      {/* <div> */}
+      {/*   <Chips /> */}
+      {/* </div> */}
 
       <div className="px-12">
         <SearchResult params={searchParams} />

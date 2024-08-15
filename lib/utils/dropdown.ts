@@ -15,20 +15,19 @@ interface DropdownItem {
 
 export const getDropDownItems = (user: User) => {
   const common: DropdownItem[] = [
-    {
-      name: "Profile",
-      icon: UserIcon,
-      link: `/profile/${user?.id}`,
-      requireRoles: ["gharpeti", "customer"],
-    },
-
-    {
-      name: "Settings",
-      icon: Settings,
-      link: "/settings",
-
-      requireRoles: ["gharpeti", "customer"],
-    },
+    // {
+    //   name: "Profile",
+    //   icon: UserIcon,
+    //   link: `/profile/${user?.id}`,
+    //   requireRoles: ["gharpeti", "customer"],
+    // },
+    // {
+    //   name: "Settings",
+    //   icon: Settings,
+    //   link: "/settings",
+    //
+    //   requireRoles: ["gharpeti", "customer"],
+    // },
   ];
 
   if (user?.type === "gharpeti") {

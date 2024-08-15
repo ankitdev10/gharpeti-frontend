@@ -127,7 +127,8 @@ export const PropertyForm = ({
       if (res.data) {
         await uploadImages(res.data.id + "");
         toast.success("Property created successfully");
-        router.push("/profile/gharbheti/properties");
+        router.refresh();
+        // router.push("/profile/gharbheti/properties");
       }
     }
   };

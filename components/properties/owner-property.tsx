@@ -1,12 +1,11 @@
 "use client";
 import { getProperyOfOwner } from "@/lib/providers/properties";
 import { useQuery } from "@tanstack/react-query";
+import { EditIcon, Pin } from "lucide-react";
 import Image from "next/image";
-import { Button } from "../ui/button";
-import { Badge } from "../ui/badge";
-import { Map } from "../map";
-import { EditIcon, LocateFixedIcon, LocateIcon, Pin } from "lucide-react";
 import Link from "next/link";
+import { Badge } from "../ui/badge";
+import { Button } from "../ui/button";
 
 export const OwnerProperty = () => {
   const { data, isLoading } = useQuery({
@@ -62,24 +61,13 @@ export const OwnerProperty = () => {
                   <h2 className="text-xl font-semibold mb-4">
                     Other Attributes
                   </h2>
-
                   <div className="border divide-y">
-                    <div className="grid grid-cols-2">
-                      <h6 className="border-r bg-muted p-2">key</h6>
-                      <h6 className=" p-2">value</h6>
-                    </div>
-                    <div className="grid grid-cols-2">
-                      <h1 className="border-r bg-muted p-2">key</h1>
-                      <h1 className=" p-2">value</h1>
-                    </div>
-                    <div className="grid grid-cols-2">
-                      <h1 className="border-r bg-muted p-2">key</h1>
-                      <h1 className=" p-2">value</h1>
-                    </div>
-                    <div className="grid grid-cols-2">
-                      <h1 className="border-r bg-muted p-2">key</h1>
-                      <h1 className=" p-2">value</h1>
-                    </div>
+                    {data.attributes.map((data, index) => (
+                      <div key={data.key + index} className="grid grid-cols-2">
+                        <h6 className="border-r bg-muted p-2">{data.key}</h6>
+                        <h6 className=" p-2">{data.value}</h6>
+                      </div>
+                    ))}
                   </div>
                 </div>
 

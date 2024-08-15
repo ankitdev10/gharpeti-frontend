@@ -45,10 +45,6 @@ export const PropertyCard = ({
               <Image src="/door.svg" alt="house" width={20} height={20} />
               <span>{data?.rooms} rooms</span>
             </div>
-            {/* <div className="text-xs text-muted-foreground flex space-x-1 items-center"> */}
-            {/*   <Image src="/dimension.svg" alt="house" width={20} height={20} /> */}
-            {/*   <span>3 Rooms</span> */}
-            {/* </div> */}
           </div>
         </div>
       </CardContent>

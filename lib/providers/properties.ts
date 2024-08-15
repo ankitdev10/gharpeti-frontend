@@ -18,6 +18,15 @@ export const getProperty = async (id: string) => {
   }
 };
 
+export const getLatestProperties = async () => {
+  try {
+    const res = await api.get<ApiResponse<Property[]>>("/property/latest");
+    return res.data;
+  } catch (err: any) {
+    throw new Error(err.response.data.message);
+  }
+};
+
 export const getProperyOfOwner = async () => {
   try {
     const res = await api.get<ApiResponse<Property[]>>("/property/owner/all");
